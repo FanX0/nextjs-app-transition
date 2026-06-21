@@ -123,7 +123,7 @@ export function VerticalSplitBoxTransition({
 
   // Block interactions during exit animation
   useEffect(() => {
-    const method = phase !== "idle" ? "add" : "remove";
+    const method = phase === "exit" ? "add" : "remove";
     document.body.classList[method]("is-transitioning");
     return () => document.body.classList.remove("is-transitioning");
   }, [phase]);

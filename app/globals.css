@@ -53,12 +53,6 @@ a {
   position: fixed;
   top: 0;
   z-index: 10;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-body.is-transitioning .header {
-  opacity: 0;
-  transform: translateY(-20px);
 }
 
 .header a {
@@ -137,17 +131,33 @@ body.is-transitioning .header {
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 999;
+  z-index: 2;
 }
 
 /* 
   By rotating the entire SVG wrapper from the center of the screen, 
   we avoid having to calculate complex SVG path math for all 4 directions! 
 */
-.curve-rotator-up { transform: translate(-50%, -50%) rotate(0deg); width: 100vw; height: 100vh; }
-.curve-rotator-down { transform: translate(-50%, -50%) rotate(180deg); width: 100vw; height: 100vh; }
-.curve-rotator-left { transform: translate(-50%, -50%) rotate(-90deg); width: 100vh; height: 100vw; }
-.curve-rotator-right { transform: translate(-50%, -50%) rotate(90deg); width: 100vh; height: 100vw; }
+.curve-rotator-up {
+  transform: translate(-50%, -50%) rotate(0deg);
+  width: 100vw;
+  height: 100vh;
+}
+.curve-rotator-down {
+  transform: translate(-50%, -50%) rotate(180deg);
+  width: 100vw;
+  height: 100vh;
+}
+.curve-rotator-left {
+  transform: translate(-50%, -50%) rotate(-90deg);
+  width: 100vh;
+  height: 100vw;
+}
+.curve-rotator-right {
+  transform: translate(-50%, -50%) rotate(90deg);
+  width: 100vh;
+  height: 100vw;
+}
 
 .curve-rotator svg,
 .curve-rotator .transition-background {
@@ -199,21 +209,53 @@ body.is-transitioning .header {
   z-index: 999;
 }
 
-.slide .transition-box-enter-up { animation: slide-enter-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; top: 0; }
-.slide .transition-box-exit-up { animation: slide-exit-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards; top: 100vh; }
-.slide .transition-box-idle-up { top: 100vh; }
+.slide .transition-box-enter-up {
+  animation: slide-enter-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+  top: 0;
+}
+.slide .transition-box-exit-up {
+  animation: slide-exit-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  top: 100vh;
+}
+.slide .transition-box-idle-up {
+  top: 100vh;
+}
 
-.slide .transition-box-enter-down { animation: slide-enter-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; top: 0; }
-.slide .transition-box-exit-down { animation: slide-exit-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards; top: -100vh; }
-.slide .transition-box-idle-down { top: -100vh; }
+.slide .transition-box-enter-down {
+  animation: slide-enter-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+  top: 0;
+}
+.slide .transition-box-exit-down {
+  animation: slide-exit-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  top: -100vh;
+}
+.slide .transition-box-idle-down {
+  top: -100vh;
+}
 
-.slide .transition-box-enter-left { animation: slide-enter-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; left: 0; }
-.slide .transition-box-exit-left { animation: slide-exit-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards; left: 100vw; }
-.slide .transition-box-idle-left { left: 100vw; }
+.slide .transition-box-enter-left {
+  animation: slide-enter-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+  left: 0;
+}
+.slide .transition-box-exit-left {
+  animation: slide-exit-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  left: 100vw;
+}
+.slide .transition-box-idle-left {
+  left: 100vw;
+}
 
-.slide .transition-box-enter-right { animation: slide-enter-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; left: 0; }
-.slide .transition-box-exit-right { animation: slide-exit-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards; left: -100vw; }
-.slide .transition-box-idle-right { left: -100vw; }
+.slide .transition-box-enter-right {
+  animation: slide-enter-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+  left: 0;
+}
+.slide .transition-box-exit-right {
+  animation: slide-exit-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  left: -100vw;
+}
+.slide .transition-box-idle-right {
+  left: -100vw;
+}
 
 /* ------------------------------------------------------------------ */
 /*  Stairs Page Transition                                             */
@@ -228,8 +270,16 @@ body.is-transitioning .header {
   width: 100vw;
   z-index: 999;
 }
-.stairs .transition-container-up, .stairs .transition-container-down { display: flex; flex-direction: row; }
-.stairs .transition-container-left, .stairs .transition-container-right { display: flex; flex-direction: column; }
+.stairs .transition-container-up,
+.stairs .transition-container-down {
+  display: flex;
+  flex-direction: row;
+}
+.stairs .transition-container-left,
+.stairs .transition-container-right {
+  display: flex;
+  flex-direction: column;
+}
 
 .stairs .stair {
   background-color: black;
@@ -240,21 +290,45 @@ body.is-transitioning .header {
   will-change: transform;
 }
 
-.stairs .stair-enter-up { animation: stair-enter-up 0.4s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.stairs .stair-exit-up { animation: stair-exit-up 0.4s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.stairs .stair-idle-up { transform: translateY(100vh); }
+.stairs .stair-enter-up {
+  animation: stair-enter-up 0.4s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.stairs .stair-exit-up {
+  animation: stair-exit-up 0.4s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.stairs .stair-idle-up {
+  transform: translateY(100vh);
+}
 
-.stairs .stair-enter-down { animation: stair-enter-down 0.4s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.stairs .stair-exit-down { animation: stair-exit-down 0.4s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.stairs .stair-idle-down { transform: translateY(-100vh); }
+.stairs .stair-enter-down {
+  animation: stair-enter-down 0.4s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.stairs .stair-exit-down {
+  animation: stair-exit-down 0.4s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.stairs .stair-idle-down {
+  transform: translateY(-100vh);
+}
 
-.stairs .stair-enter-left { animation: stair-enter-left 0.4s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.stairs .stair-exit-left { animation: stair-exit-left 0.4s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.stairs .stair-idle-left { transform: translateX(100vw); }
+.stairs .stair-enter-left {
+  animation: stair-enter-left 0.4s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.stairs .stair-exit-left {
+  animation: stair-exit-left 0.4s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.stairs .stair-idle-left {
+  transform: translateX(100vw);
+}
 
-.stairs .stair-enter-right { animation: stair-enter-right 0.4s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.stairs .stair-exit-right { animation: stair-exit-right 0.4s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.stairs .stair-idle-right { transform: translateX(-100vw); }
+.stairs .stair-enter-right {
+  animation: stair-enter-right 0.4s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.stairs .stair-exit-right {
+  animation: stair-exit-right 0.4s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.stairs .stair-idle-right {
+  transform: translateX(-100vw);
+}
 
 /* ------------------------------------------------------------------ */
 /*  Split Page Transition                                              */
@@ -269,8 +343,16 @@ body.is-transitioning .header {
   width: 100vw;
   z-index: 999;
 }
-.split .transition-container-up, .split .transition-container-down { display: flex; flex-direction: row; }
-.split .transition-container-left, .split .transition-container-right { display: flex; flex-direction: column; }
+.split .transition-container-up,
+.split .transition-container-down {
+  display: flex;
+  flex-direction: row;
+}
+.split .transition-container-left,
+.split .transition-container-right {
+  display: flex;
+  flex-direction: column;
+}
 
 .split .split-panel {
   background-color: black;
@@ -282,40 +364,88 @@ body.is-transitioning .header {
 }
 
 /* For direction="up", Left panel goes UP, Right panel goes DOWN */
-.split .split-panel-enter-up-1 { animation: stair-enter-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; }
-.split .split-panel-exit-up-1 { animation: stair-exit-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.split .split-panel-idle-up-1 { transform: translateY(100vh); }
+.split .split-panel-enter-up-1 {
+  animation: stair-enter-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+}
+.split .split-panel-exit-up-1 {
+  animation: stair-exit-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.split .split-panel-idle-up-1 {
+  transform: translateY(100vh);
+}
 
-.split .split-panel-enter-up-2 { animation: stair-enter-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; }
-.split .split-panel-exit-up-2 { animation: stair-exit-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.split .split-panel-idle-up-2 { transform: translateY(-100vh); }
+.split .split-panel-enter-up-2 {
+  animation: stair-enter-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+}
+.split .split-panel-exit-up-2 {
+  animation: stair-exit-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.split .split-panel-idle-up-2 {
+  transform: translateY(-100vh);
+}
 
 /* For direction="down", Left panel goes DOWN, Right panel goes UP */
-.split .split-panel-enter-down-1 { animation: stair-enter-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; }
-.split .split-panel-exit-down-1 { animation: stair-exit-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.split .split-panel-idle-down-1 { transform: translateY(-100vh); }
+.split .split-panel-enter-down-1 {
+  animation: stair-enter-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+}
+.split .split-panel-exit-down-1 {
+  animation: stair-exit-down 0.5s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.split .split-panel-idle-down-1 {
+  transform: translateY(-100vh);
+}
 
-.split .split-panel-enter-down-2 { animation: stair-enter-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; }
-.split .split-panel-exit-down-2 { animation: stair-exit-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.split .split-panel-idle-down-2 { transform: translateY(100vh); }
+.split .split-panel-enter-down-2 {
+  animation: stair-enter-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+}
+.split .split-panel-exit-down-2 {
+  animation: stair-exit-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.split .split-panel-idle-down-2 {
+  transform: translateY(100vh);
+}
 
 /* For direction="left", Top panel goes LEFT, Bottom panel goes RIGHT */
-.split .split-panel-enter-left-1 { animation: stair-enter-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; }
-.split .split-panel-exit-left-1 { animation: stair-exit-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.split .split-panel-idle-left-1 { transform: translateX(100vw); }
+.split .split-panel-enter-left-1 {
+  animation: stair-enter-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+}
+.split .split-panel-exit-left-1 {
+  animation: stair-exit-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.split .split-panel-idle-left-1 {
+  transform: translateX(100vw);
+}
 
-.split .split-panel-enter-left-2 { animation: stair-enter-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; }
-.split .split-panel-exit-left-2 { animation: stair-exit-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.split .split-panel-idle-left-2 { transform: translateX(-100vw); }
+.split .split-panel-enter-left-2 {
+  animation: stair-enter-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+}
+.split .split-panel-exit-left-2 {
+  animation: stair-exit-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.split .split-panel-idle-left-2 {
+  transform: translateX(-100vw);
+}
 
 /* For direction="right", Top panel goes RIGHT, Bottom panel goes LEFT */
-.split .split-panel-enter-right-1 { animation: stair-enter-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; }
-.split .split-panel-exit-right-1 { animation: stair-exit-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.split .split-panel-idle-right-1 { transform: translateX(-100vw); }
+.split .split-panel-enter-right-1 {
+  animation: stair-enter-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+}
+.split .split-panel-exit-right-1 {
+  animation: stair-exit-right 0.5s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.split .split-panel-idle-right-1 {
+  transform: translateX(-100vw);
+}
 
-.split .split-panel-enter-right-2 { animation: stair-enter-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; }
-.split .split-panel-exit-right-2 { animation: stair-exit-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) both; }
-.split .split-panel-idle-right-2 { transform: translateX(100vw); }
+.split .split-panel-enter-right-2 {
+  animation: stair-enter-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both;
+}
+.split .split-panel-exit-right-2 {
+  animation: stair-exit-left 0.5s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+.split .split-panel-idle-right-2 {
+  transform: translateX(100vw);
+}
 
 /* 4. Interaction Blocker */
 .transition-blocker {
@@ -345,17 +475,89 @@ body.is-transitioning * {
 
 /* Route Text Keyframes */
 /* Using transform instead of top/left ensures the text remains perfectly centered on its perpendicular axis and provides 60fps GPU-accelerated movement. */
-@keyframes route-enter-up { from { opacity: 1; transform: translate(-50%, -50%); } to { opacity: 0; transform: translate(-50%, -150%); } }
-@keyframes route-exit-up { from { opacity: 0; transform: translate(-50%, 50%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+@keyframes route-enter-up {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -150%);
+  }
+}
+@keyframes route-exit-up {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
 
-@keyframes route-enter-down { from { opacity: 1; transform: translate(-50%, -50%); } to { opacity: 0; transform: translate(-50%, 50%); } }
-@keyframes route-exit-down { from { opacity: 0; transform: translate(-50%, -150%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+@keyframes route-enter-down {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, 50%);
+  }
+}
+@keyframes route-exit-down {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -150%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
 
-@keyframes route-enter-left { from { opacity: 1; transform: translate(-50%, -50%); } to { opacity: 0; transform: translate(-150%, -50%); } }
-@keyframes route-exit-left { from { opacity: 0; transform: translate(50%, -50%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+@keyframes route-enter-left {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-150%, -50%);
+  }
+}
+@keyframes route-exit-left {
+  from {
+    opacity: 0;
+    transform: translate(50%, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
 
-@keyframes route-enter-right { from { opacity: 1; transform: translate(-50%, -50%); } to { opacity: 0; transform: translate(50%, -50%); } }
-@keyframes route-exit-right { from { opacity: 0; transform: translate(-150%, -50%); } to { opacity: 1; transform: translate(-50%, -50%); } }
+@keyframes route-enter-right {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(50%, -50%);
+  }
+}
+@keyframes route-exit-right {
+  from {
+    opacity: 0;
+    transform: translate(-150%, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
 
 @keyframes curve-enter {
   from {
@@ -378,28 +580,140 @@ body.is-transitioning * {
 
 /* Slide Keyframes */
 
-@keyframes slide-enter-up { from { top: 0; } to { top: -100vh; } }
-@keyframes slide-exit-up { from { top: 100vh; } to { top: 0; } }
+@keyframes slide-enter-up {
+  from {
+    top: 0;
+  }
+  to {
+    top: -100vh;
+  }
+}
+@keyframes slide-exit-up {
+  from {
+    top: 100vh;
+  }
+  to {
+    top: 0;
+  }
+}
 
-@keyframes slide-enter-down { from { top: 0; } to { top: 100vh; } }
-@keyframes slide-exit-down { from { top: -100vh; } to { top: 0; } }
+@keyframes slide-enter-down {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100vh;
+  }
+}
+@keyframes slide-exit-down {
+  from {
+    top: -100vh;
+  }
+  to {
+    top: 0;
+  }
+}
 
-@keyframes slide-enter-left { from { left: 0; } to { left: -100vw; } }
-@keyframes slide-exit-left { from { left: 100vw; } to { left: 0; } }
+@keyframes slide-enter-left {
+  from {
+    left: 0;
+  }
+  to {
+    left: -100vw;
+  }
+}
+@keyframes slide-exit-left {
+  from {
+    left: 100vw;
+  }
+  to {
+    left: 0;
+  }
+}
 
-@keyframes slide-enter-right { from { left: 0; } to { left: 100vw; } }
-@keyframes slide-exit-right { from { left: -100vw; } to { left: 0; } }
+@keyframes slide-enter-right {
+  from {
+    left: 0;
+  }
+  to {
+    left: 100vw;
+  }
+}
+@keyframes slide-exit-right {
+  from {
+    left: -100vw;
+  }
+  to {
+    left: 0;
+  }
+}
 
 /* Stairs Keyframes (GPU-accelerated transforms) */
 
-@keyframes stair-enter-up { from { transform: translateY(0); } to { transform: translateY(-100vh); } }
-@keyframes stair-exit-up { from { transform: translateY(100vh); } to { transform: translateY(0); } }
+@keyframes stair-enter-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}
+@keyframes stair-exit-up {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
 
-@keyframes stair-enter-down { from { transform: translateY(0); } to { transform: translateY(100vh); } }
-@keyframes stair-exit-down { from { transform: translateY(-100vh); } to { transform: translateY(0); } }
+@keyframes stair-enter-down {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+@keyframes stair-exit-down {
+  from {
+    transform: translateY(-100vh);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
 
-@keyframes stair-enter-left { from { transform: translateX(0); } to { transform: translateX(-100vw); } }
-@keyframes stair-exit-left { from { transform: translateX(100vw); } to { transform: translateX(0); } }
+@keyframes stair-enter-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100vw);
+  }
+}
+@keyframes stair-exit-left {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 
-@keyframes stair-enter-right { from { transform: translateX(0); } to { transform: translateX(100vw); } }
-@keyframes stair-exit-right { from { transform: translateX(-100vw); } to { transform: translateX(0); } }
+@keyframes stair-enter-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+@keyframes stair-exit-right {
+  from {
+    transform: translateX(-100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
