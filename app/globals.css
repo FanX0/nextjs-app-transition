@@ -131,7 +131,7 @@ a {
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 2;
+  z-index: 999;
 }
 
 /* 
@@ -159,7 +159,7 @@ a {
 }
 
 .curve-rotator .transition-svg {
-  z-index: 2;
+  z-index: 999;
 }
 
 /* 3. SVG Animation Phases */
@@ -190,7 +190,7 @@ a {
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 2;
+  z-index: 999;
 }
 
 .slide .transition-box-enter-up { animation: slide-enter-up 0.5s cubic-bezier(0.76, 0, 0.24, 1) 0.2s both; top: 0; }
@@ -220,7 +220,7 @@ a {
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 2;
+  z-index: 999;
 }
 .stairs .transition-container-up, .stairs .transition-container-down { display: flex; flex-direction: row; }
 .stairs .transition-container-left, .stairs .transition-container-right { display: flex; flex-direction: column; }
@@ -261,7 +261,7 @@ a {
   position: fixed;
   top: 0;
   width: 100vw;
-  z-index: 2;
+  z-index: 999;
 }
 .split .transition-container-up, .split .transition-container-down { display: flex; flex-direction: row; }
 .split .transition-container-left, .split .transition-container-right { display: flex; flex-direction: column; }
