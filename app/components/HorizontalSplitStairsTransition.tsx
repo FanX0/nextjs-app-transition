@@ -33,7 +33,7 @@ function HorizontalSplitStairsOverlay({
   const stairs = Array.from({ length: NUM_STAIRS });
 
   return (
-    <div className="transition-container stairs-container" style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", pointerEvents: "none", zIndex: 2 }}>
+    <div className="transition-container stairs-container" style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", pointerEvents: "none", zIndex: 999 }}>
       {stairs.map((_, i) => {
         // Stagger from left to right
         const delay = i * STAGGER_DELAY;
