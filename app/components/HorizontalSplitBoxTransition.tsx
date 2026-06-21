@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getRouteByHref } from "@/config/routes";
+import { getRouteByHref } from "../config/routes";
 
 const TRANSITION_DURATION = 500;
 
