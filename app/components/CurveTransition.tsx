@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { type ReactNode, useEffect, useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useState, useRef } from "react";
 import { getRouteByHref } from "../config/routes";
 
 /* ------------------------------------------------------------------ */
@@ -31,6 +31,7 @@ const BOTTOM_AMPLITUDE = 600;
 
 /** Total duration before phase resets to idle (ms). */
 const TRANSITION_DURATION = 700;
+const INITIAL_LOAD_DELAY = 500;
 
 /* ------------------------------------------------------------------ */
 /*  SVG path builders                                                  */
@@ -215,15 +216,20 @@ export function CurveTransition({
   const routeTitle = transitionTitle ?? currentRoute.transitionTitle;
 
   // On route change → enter phase, then idle
+  const isInitialMount = useRef(true);
+
   useEffect(() => {
+    const delay = isInitialMount.current ? INITIAL_LOAD_DELAY : 0;
+    isInitialMount.current = false;
+
     const enterTimeout = window.setTimeout(() => {
       setTransitionTitle(null);
       setPhase("enter");
-    }, 0);
+    }, delay);
 
     const idleTimeout = window.setTimeout(() => {
       setPhase("idle");
-    }, TRANSITION_DURATION);
+    }, delay + TRANSITION_DURATION);
 
     return () => {
       window.clearTimeout(enterTimeout);

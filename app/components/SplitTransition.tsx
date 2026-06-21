@@ -1,10 +1,11 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { getRouteByHref } from "../config/routes";
 
 const TRANSITION_DURATION = 700;
+const INITIAL_LOAD_DELAY = 500;
 
 /* ------------------------------------------------------------------ */
 /*  Types & Events                                                     */
@@ -83,15 +84,20 @@ export function SplitTransition({
   const routeTitle = transitionTitle ?? currentRoute.transitionTitle;
 
   // On route change → enter phase, then idle
+  const isInitialMount = useRef(true);
+
   useEffect(() => {
+    const delay = isInitialMount.current ? INITIAL_LOAD_DELAY : 0;
+    isInitialMount.current = false;
+
     const enterTimeout = window.setTimeout(() => {
       setTransitionTitle(null);
       setPhase("enter");
-    }, 0);
+    }, delay);
 
     const idleTimeout = window.setTimeout(() => {
       setPhase("idle");
-    }, TRANSITION_DURATION);
+    }, delay + TRANSITION_DURATION);
 
     return () => {
       window.clearTimeout(enterTimeout);
