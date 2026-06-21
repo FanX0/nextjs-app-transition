@@ -53,6 +53,12 @@ a {
   position: fixed;
   top: 0;
   z-index: 10;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+body.is-transitioning .header {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 
 .header a {
