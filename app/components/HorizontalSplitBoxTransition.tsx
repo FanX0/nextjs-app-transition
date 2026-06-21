@@ -20,7 +20,7 @@ function HorizontalSplitBoxOverlay({
   route: string;
 }) {
   return (
-    <div className="transition-container stairs-container" style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", pointerEvents: "none", zIndex: 999 }}>
+    <div className="transition-container stairs-container" style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", pointerEvents: "none" }}>
       <div style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh" }}>
         
         {/* Top Half */}

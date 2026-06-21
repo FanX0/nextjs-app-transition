@@ -34,7 +34,7 @@ function VerticalSplitStairsOverlay({
   const stairs = Array.from({ length: NUM_STAIRS });
 
   return (
-    <div className="transition-container stairs-container" style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", pointerEvents: "none", zIndex: 999 }}>
+    <div className="transition-container stairs-container" style={{ position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh", pointerEvents: "none" }}>
       {stairs.map((_, i) => {
         // Stagger from top to bottom
         const delay = i * STAGGER_DELAY;
