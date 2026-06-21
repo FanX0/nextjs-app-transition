@@ -19,6 +19,8 @@ const EXIT_DURATION = 1000;
  * Usage:
  *   <TransitionLink href="/about">About</TransitionLink>
  */
+let isNavigating = false;
+
 export function TransitionLink({
   href,
   onClick,
@@ -31,12 +33,8 @@ export function TransitionLink({
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     onClick?.(event);
 
-    // Block clicks while a transition is already running
-    const isTransitioning =
-      document.body.classList.contains("is-transitioning");
-
     if (
-      isTransitioning ||
+      isNavigating ||
       event.defaultPrevented ||
       event.metaKey ||
       event.ctrlKey ||
@@ -45,11 +43,12 @@ export function TransitionLink({
       event.button !== 0 ||
       href === pathname
     ) {
-      if (isTransitioning) event.preventDefault();
+      if (isNavigating) event.preventDefault();
       return;
     }
 
     event.preventDefault();
+    isNavigating = true;
 
     // Notify PageTransition to start the exit animation
     window.dispatchEvent(
@@ -62,7 +61,15 @@ export function TransitionLink({
     );
 
     // Navigate after the exit animation completes
-    window.setTimeout(() => router.push(href), EXIT_DURATION);
+    window.setTimeout(() => {
+      router.push(href);
+    }, EXIT_DURATION);
+
+    // Unlock interactions strictly after BOTH exit and enter animations finish
+    // EXIT_DURATION (exit) + 500ms (enter)
+    window.setTimeout(() => {
+      isNavigating = false;
+    }, EXIT_DURATION + 500);
   }
 
   return (
