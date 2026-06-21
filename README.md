@@ -2,68 +2,99 @@
 
 This project demonstrates how to build and orchestrate smooth, professional-grade page transitions in the **Next.js App Router** using **Framer Motion**. It features a robust architecture that completely bypasses the limitations of the App Router's lack of native exit animations.
 
-## 🏗️ Code Flow & Architecture
+## 🚀 Step-by-Step Usage Guide
 
-The transition system is built on two primary pillars:
+Follow these steps to add and use page transitions in your Next.js application:
 
-### 1. `TransitionLink` (The Trigger)
-Because the Next.js App Router immediately unmounts the old page when `router.push()` is called, traditional `AnimatePresence` exit animations do not work reliably. 
+### Step 1: Wrap Your Pages
+To animate a page when it loads, you must wrap its contents with one of the provided transition components. 
 
-To solve this, we use the `TransitionLink` component (`app/components/TransitionLink.tsx`):
-1. **Intercepts Clicks**: When a user clicks a link, the default Next.js routing is stopped.
-2. **Triggers Exit State**: It adds an `.is-transitioning` class to the body (or updates a global state) to trigger the exit animation on the *current* page.
-3. **Locks Interaction**: During this time, the UI is locked so the user cannot click multiple links rapidly.
-4. **Delays Navigation**: It waits for a specific `EXIT_DURATION` (e.g., 1000ms) to allow the exit animation to finish.
-5. **Navigates**: Finally, it calls `router.push(href)` to mount the new page.
-
-### 2. Transition Components (The Animations)
-Inside `app/components/`, there is a suite of reusable transition wrappers:
-- `CurveTransition`
-- `HorizontalSplitBoxTransition` / `HorizontalSplitStairsTransition`
-- `VerticalSplitBoxTransition` / `VerticalSplitStairsTransition`
-- `SlideTransition`
-- `StairsTransition`
-- `SplitTransition`
-
-Each of these components uses `<motion.div>` to handle:
-- **Enter Animation**: Plays immediately when the new page mounts.
-- **Center Text Display**: Often shows the name of the route (fetched via `getRouteByHref`) in the center of the screen during the transition gap.
-
-## 🚀 Usage
-
-To apply a transition to a page, simply wrap the page content with your desired transition component:
+For example, if you want to use the `CurveTransition` on your About page:
 
 ```tsx
-import { CurveTransition } from "../components/CurveTransition";
+// app/about/page.tsx
+import { CurveTransition } from "@/components/CurveTransition";
 
 export default function AboutPage() {
   return (
     <CurveTransition>
-      <main>
+      <main className="p-10">
         <h1>About Us</h1>
+        <p>This page loaded with a beautiful curve transition!</p>
       </main>
     </CurveTransition>
   )
 }
 ```
 
-To navigate between pages and trigger the exit animations, always use the custom `TransitionLink` instead of the standard Next.js `<Link>`:
+*Available Transition Components:*
+- `CurveTransition`
+- `SlideTransition`
+- `HorizontalSplitBoxTransition`
+- `HorizontalSplitStairsTransition`
+- `VerticalSplitBoxTransition`
+- `VerticalSplitStairsTransition`
+- `SplitStairsTransition`
+- `SplitTransition`
+- `StairsTransition`
+
+### Step 2: Use the Custom `<TransitionLink />`
+Because the Next.js App Router unmounts pages instantly, standard `<Link>` components will skip the exit animation. 
+
+Instead, you **must** use the custom `<TransitionLink>` component whenever you want to trigger a transition to a new page.
 
 ```tsx
-import { TransitionLink } from "../components/TransitionLink";
+// app/components/Navigation.tsx
+import { TransitionLink } from "@/components/TransitionLink";
 
 export default function Navigation() {
   return (
-    <TransitionLink href="/about">
-      Go to About
-    </TransitionLink>
+    <nav>
+      {/* ❌ DON'T use next/link */}
+      {/* <Link href="/about">About</Link> */}
+
+      {/* ✅ DO use TransitionLink */}
+      <TransitionLink href="/about" className="text-blue-500">
+        Go to About Page
+      </TransitionLink>
+    </nav>
   )
 }
 ```
 
+### Step 3: Configure Route Names (Optional)
+Many of the transition animations (like the split variants) display the name of the route in the center of the screen while the transition is happening. 
+
+To make sure the correct text is displayed, define your routes in `app/config/routes.ts`:
+
+```typescript
+// app/config/routes.ts
+export const routes = [
+  { href: "/", name: "Home" },
+  { href: "/about", name: "About Us" },
+  { href: "/contact", name: "Contact" },
+];
+
+export const getRouteByHref = (href: string) => {
+  return routes.find((route) => route.href === href)?.name || "Page";
+};
+```
+
+---
+
+## 🏗️ How it Works (Under the Hood)
+
+1. **User Clicks a Link**: The user clicks a `<TransitionLink>`.
+2. **Click Intercepted**: `TransitionLink` prevents standard routing (`e.preventDefault()`).
+3. **Trigger Exit Animation**: It adds an `.is-transitioning` class to the body. This signals Framer Motion to start playing the *exit* animation for the current page wrapper.
+4. **Lock User Interaction**: The UI is locked so the user cannot click other links while the animation plays.
+5. **Delay Routing**: `TransitionLink` waits for exactly `1000ms` (the length of the exit animation).
+6. **Navigate**: Finally, it calls `router.push(href)` to change the URL.
+7. **Enter Animation**: The new page loads, and its transition wrapper automatically plays the *enter* animation.
+
 ## 💻 Getting Started
 
-First, install dependencies using `pnpm` (the recommended package manager for this project):
+First, install dependencies:
 ```bash
 pnpm install
 ```
