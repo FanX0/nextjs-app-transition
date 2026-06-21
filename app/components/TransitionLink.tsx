@@ -10,7 +10,7 @@ type TransitionLinkProps = ComponentProps<typeof Link> & {
 };
 
 /** Delay before pushing the route (ms). Must match the exit animation duration. */
-const EXIT_DURATION = 500;
+const EXIT_DURATION = 1000;
 
 /**
  * A drop-in replacement for Next.js <Link> that triggers a
@@ -32,7 +32,8 @@ export function TransitionLink({
     onClick?.(event);
 
     // Block clicks while a transition is already running
-    const isTransitioning = document.body.classList.contains("is-transitioning");
+    const isTransitioning =
+      document.body.classList.contains("is-transitioning");
 
     if (
       isTransitioning ||
